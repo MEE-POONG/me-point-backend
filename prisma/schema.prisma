@@ -1,0 +1,62 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String          @id @default(auto()) @map("_id") @db.ObjectId
+  name          String
+  email         String          @unique
+  password      String
+  points        Int             @default(0)
+  transactions  Transaction[]
+  PointsHistory PointsHistory[]
+  RewardHistory RewardHistory[]
+}
+
+model Transaction {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String   @db.ObjectId
+  amount    Int
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model Reward {
+  id            String          @id @default(auto()) @map("_id") @db.ObjectId
+  name          String
+  points        Int
+  stock         Int
+  RewardHistory RewardHistory[]
+}
+
+model Coupon {
+  id       String  @id @default(auto()) @map("_id") @db.ObjectId
+  code     String  @unique
+  discount Int
+  isActive Boolean @default(true)
+}
+
+model PointsHistory {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String   @db.ObjectId
+  amount    Int
+  timestamp DateTime @default(now())
+
+  // Assuming a relation to the User model
+  user User @relation(fields: [userId], references: [id])
+}
+
+model RewardHistory {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId     String   @db.ObjectId
+  rewardId   String   @db.ObjectId
+  redeemedAt DateTime @default(now())
+
+  user   User   @relation(fields: [userId], references: [id])
+  reward Reward @relation(fields: [rewardId], references: [id])
+}
