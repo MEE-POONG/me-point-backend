@@ -1,0 +1,146 @@
+Test Api
+คุณกำลังดูเนื้อหาที่สร้างขึ้นโดยผู้ใช้ที่อาจไม่ได้รับการยืนยันหรือไม่ปลอดภัย
+รายงาน
+ChatGPT
+แก้ไขด้วย ChatGPT
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+### **ทดสอบ API ทั้งระบบ (User, เติม Point, แลกของ, เพิ่มของรางวัล)**
+
+---
+
+## **1️⃣ สร้างผู้ใช้ใหม่ (Signup)**
+**Method:** `POST`
+**URL:** `http://localhost:3000/users`
+**Headers:**
+- `Content-Type: application/json`
+
+**Body:**
+```json
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "password": "securepassword"
+}
+```
+---
+
+## **2️⃣ เติม Point ให้ผู้ใช้**
+**Method:** `POST`
+**URL:** `http://localhost:3000/points/add/user123`
+**Headers:**
+- `Content-Type: application/json`
+
+**Body:**
+```json
+{
+  "amount": 500
+}
+```
+---
+
+## **3️⃣ ตรวจสอบยอด Point ของผู้ใช้**
+**Method:** `GET`
+**URL:** `http://localhost:3000/users/user123`
+---
+
+## **4️⃣ เพิ่มของรางวัล**
+**Method:** `POST`
+**URL:** `http://localhost:3000/rewards/add`
+**Headers:**
+- `Content-Type: application/json`
+
+**Body:**
+```json
+{
+  "name": "Smartphone",
+  "points": 400,
+  "stock": 10
+}
+```
+---
+
+## **5️⃣ ดึงรายการของรางวัลทั้งหมด**
+**Method:** `GET`
+**URL:** `http://localhost:3000/rewards`
+---
+
+## **6️⃣ แลกของรางวัล**
+**Method:** `POST`
+**URL:** `http://localhost:3000/rewards/redeem/user123/reward001`
+---
+
+## **7️⃣ ตรวจสอบประวัติการแลกของรางวัล**
+**Method:** `GET`
+**URL:** `http://localhost:3000/rewards/history/user123`
+---
+
